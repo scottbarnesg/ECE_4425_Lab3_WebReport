@@ -1,0 +1,249 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Jennifer Jobst">
+   <meta name="GENERATOR" content="Mozilla/4.5 [en] (WinNT; I) [Netscape]">
+   <title>SLA description</title>
+</head>
+<body>
+
+<h2>
+<a NAME="Statistic Graph"></a>Statistic Graphs</h2>
+
+<table COLS=1 WIDTH="575" >
+<tr>
+<td>The graph in the panel&nbsp; below is called a <b>statistic graph</b>,
+which shows several important details about an actual statistic.&nbsp;
+There are three distinct values represented in a statistic graph (the
+<a href="#Statistic threshold">statistic
+threshold</a>, <a href="#Statistic mean">statistic average</a>, and <a href="#Statistic min/max">statistic
+minimum/maximum</a>), each of which are explained in the following sections.</td>
+</tr>
+</table>
+
+<table COLS=1 WIDTH="575" >
+<tr>
+<td ALIGN=CENTER WIDTH="575">&nbsp;
+<center><table BORDER COLS=1 WIDTH="65%" >
+<tr>
+<td>
+<center><img SRC="panel_sla_explain1.gif" BORDER=0 height=291 width=491></center>
+</td>
+</tr>
+</table></center>
+
+<center>
+<p><b>A statistic graph</b></center>
+</td>
+</tr>
+</table>
+.
+<br>
+<hr ALIGN=LEFT WIDTH="200">
+<h4>
+<a NAME="Statistic threshold"></a>Statistic Threshold</h4>
+
+<table COLS=1 WIDTH="575" >
+<tr>
+<td>The dotted line (circled here in red) defines the threshold specified
+for this particular statistic (called the <b>statistic threshold</b>).&nbsp;
+For this example, the average value for Response Time should not exceed
+1.0 seconds.</td>
+</tr>
+</table>
+
+<table COLS=1 WIDTH="575" >
+<tr>
+<td ALIGN=CENTER WIDTH="575"><img SRC="collated_threshold.gif" height=200 width=492>
+<br><b>The statistic threshold</b></td>
+</tr>
+</table>
+
+<h4>
+
+<hr ALIGN=LEFT WIDTH="200"></h4>
+
+<h4>
+<a NAME="Statistic mean"></a>Statistic Average</h4>
+
+<table WIDTH="575" >
+<tr>
+<td WIDTH="375">The blue bars in the graph show the <b>statistic average</b>&nbsp;
+for each bucket.&nbsp; That is, during each time period (for this simulation,
+a period is 30 seconds) the average of all the values for a statistic collected
+during that period is calculated and plotted on the graph.&nbsp; Note that
+the statistic average does not exceed the statistic threshold on this section of
+the graph.</td>
+
+<td WIDTH="200">
+<center><table BORDER WIDTH="100%" HEIGHT="100%" >
+<tr>
+<td WIDTH="90%"><img SRC="big_key_concept.gif" height=40 width=80 align=LEFT>A
+<b>bucket
+</b>defines
+a period of&nbsp; time during which statistics are collected.</td>
+</tr>
+</table></center>
+</td>
+</tr>
+</table>
+
+<table COLS=1 WIDTH="575" >
+<tr>
+<td ALIGN=CENTER WIDTH="575"><img SRC="collated_mean.gif" height=200 width=492>
+<center><b>The statistic average</b></center>
+</td>
+</tr>
+</table>
+
+<h4>
+
+<hr ALIGN=LEFT WIDTH="200"></h4>
+
+<h4>
+<a NAME="Statistic min/max"></a>Statistic Minimum and Maximum</h4>
+
+<table COLS=2 WIDTH="575" >
+<tr>
+<td WIDTH="50%">Another important result shown by this graph is the minimum
+and&nbsp; maximum values for each period.&nbsp; These lines show the range
+of values for the statistic collected during the bucket's time period.</td>
+
+<td VALIGN=BOTTOM WIDTH="50%">&nbsp;
+<div ALIGN=right><table BORDER COLS=1 WIDTH="90%" >
+<tr>
+<td><img SRC="note.gif" height=45 width=56><b> </b>Note that for panels
+that do not have a percentage compliance graph, a statistic minimum and
+maximum is not displayed in the statistic graph.&nbsp;</td>
+</tr>
+</table></div>
+</td>
+</tr>
+</table>
+
+<table COLS=1 WIDTH="469" >
+<tr>
+<td ALIGN=CENTER WIDTH="575"><img SRC="collated_minmax.gif" height=200 width=491>
+<br><b>The statistic minimum/maximum</b></td>
+</tr>
+</table>
+
+<p>
+<hr ALIGN=LEFT WIDTH="300">
+<h2>
+<a NAME="Statistic Graph + Percent Compliance Graph"></a>Statistic Graph
++ Percent Compliance Graph</h2>
+&nbsp;
+<table COLS=1 WIDTH="72%" >
+<tr>
+<td>The top graph in the panel below is called a <b>statistic graph</b>,
+which shows several important details about a statistic.&nbsp;
+The bottom graph is called a <b>percent compliance graph</b>, and shows
+the percentage of values in each period that comply with the statistic
+threshold.&nbsp; These two graphs are explained in detail in the following
+sections.
+<p><img SRC="collated.gif" height=310 width=632></td>
+</tr>
+</table>
+
+<h4>
+
+<hr ALIGN=LEFT WIDTH="300"></h4>
+
+<h4>
+Statistic Graph</h4>
+
+<table COLS=1 WIDTH="69%" >
+<tr>
+<td>There are three distinct values represented in a statistic graph, the
+statistic threshold, statistic average, and statistic minimum/maximum.
+<br>&nbsp;
+<center><table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td><img SRC="stat_graph.gif" height=187 width=607></td>
+</tr>
+</table></center>
+
+<center><b>A statistic graph</b></center>
+
+<br><b></b>&nbsp;
+<li>
+<b>Statistic threshold</b> - The threshold specified for this
+particular statistic.&nbsp;&nbsp; The average value of a statistic 
+may be greater than the threshold and the statistic will still be in compliance, because
+compliance is defined as a percentage of values above or below the
+threshold.  Therefore, a few very large values can skew the average to
+be larger than the threshold, and yet most of the values are below the
+threshold.</li>
+
+<li>
+<b>Statistic average</b> - The average of all the values for a statistic
+collected during a particular time period.</li>
+
+<li>
+<b>Statistic minimum/maximum</b> -&nbsp; The range of values collected
+for a statistic during the a particular time period.</li>
+</td>
+</tr>
+</table>
+
+<h4>
+
+<hr ALIGN=LEFT WIDTH="300"></h4>
+
+<h4>
+Percent Compliance Graph</h4>
+
+<table COLS=1 WIDTH="575" >
+<tr>
+<td>In the percent compliance graph, the threshold (denoted by the dotted
+blue line) defines the percentage of data points within a particular time
+period that must conform to the statistic threshold&nbsp; for that bucket
+to be in compliance.&nbsp; For this example, the <b>percent compliance
+threshold</b> was set to 80%.&nbsp; This means that for each time period,
+if more than 80% of the data points collected for a single period are below
+the 1.0 second Response Time statistic threshold (shown in the above statistic
+graph), that bucket is in compliance with the SLA.
+<center>
+<p><img SRC="collated_compliance.gif" height=143 width=470>
+<br><b>A percent compliance graph</b></center>
+</td>
+</tr>
+</table>
+
+<table WIDTH="575" >
+<tr>
+<td VALIGN=TOP WIDTH="375">The bars denoting the percent of data points
+in compliance with the statistic threshold for a particular bucket are
+color coded:
+<ul>
+<li>
+Green bars mean compliance.&nbsp;</li>
+
+<br>&nbsp;
+<li>
+Yellow bars denote a "close call" -<font face="Arial Narrow"><font size=-1>
+the bucket complies with the SLA, but is less than some margin above the
+compliance threshold.&nbsp; This margin is calculated as follows:</font></font></li>
+
+<br><font face="Arial Narrow"><font size=-1>margin = 10% * (100% - compliance
+threshold)</font></font>
+<br>&nbsp;
+<li>
+Red bars mean the SLA was violated.</li>
+</ul>
+</td>
+
+<td WIDTH="200">
+<table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td><img SRC="compliance_bar.gif" height=235 width=260></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

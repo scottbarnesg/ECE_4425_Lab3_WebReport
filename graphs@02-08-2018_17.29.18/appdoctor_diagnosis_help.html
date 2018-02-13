@@ -1,0 +1,400 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+	<head>
+		<title>Help: AppDoctor Diagnoses</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<meta name="GENERATOR" content="Mozilla/4.61 [en] (WinNT; I) [Netscape]">
+	</head>
+	<body BGCOLOR="white">
+		<h1>
+			AppDoctor Diagnosis</h1>
+		The AppDoctor Diagnosis window identifies various types of bottlenecks and 
+		potential bottlenecks in your network and/or application. Refer to the 
+		following sections for possible causes and recommended solutions for each type 
+		of bottleneck.
+		<br>
+		&nbsp;
+		<h3>
+			<a NAME="processing_delay"></a>Processing Delay Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		Processing on this tier is contributing significantly to the application 
+		response time.
+		<h4>
+			Explanation</h4>
+		Processing delay is due to file I/O, CPU processing, memory access, etc.
+		<br>
+		The numeric value represents tier processing delay as a percentage of the total 
+		application response time.
+		<h4>
+			Suggestions</h4>
+		1) Increase the processing speed and capabilities of the tier. <blockquote>a) 
+			Increase physical memory, if a tier frequently uses virtual memory (pages).
+			<br>
+			b) Increase CPU speed and/or number, if a tier frequently utilizes 100% of its 
+			CPUs.
+			<br>
+			c) Add faster disks, if a tier frequently accesses disks. <blockquote>o Many small 
+				read/writes will benefit from faster disk seek times.
+				<br>
+				o Many large read/writes will benefit from faster disk throughput.</blockquote>
+		</blockquote>2) Improve the processing efficiency of the application programs. <blockquote>a) 
+			For database applications: <blockquote>o Index fields that are frequently queried.
+				<br>
+				o Redesign database queries to reduce database load.
+				<br>
+				o Avoid sending records across the network one at a time, when a set is 
+				transferred.</blockquote>b) For all applications: <blockquote>o Reduce the 
+				number of allowed simultaneous connections to limit the load on the tier.
+				<br>
+				o Profile the program to determine execution bottlenecks.</blockquote></blockquote>
+		3) Reduce the load on this tier by sharing its work with additional machines.
+		<h3>
+			<a NAME="protocol_overhead"></a>Protocol Overhead Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		Large amounts of protocol overhead are increasing the utilization of your 
+		network.
+		<h4>
+			Explanations</h4>
+		Protocol headers add overhead to each application message. Protocols also send 
+		packets that have no application data (such as TCP acknowledgement packets). 
+		This overhead can introduce delays by increasing congestion in the network; 
+		these delays can be especially significant if you are sending a large number of 
+		small application messages.
+		<br>
+		The numeric value represents the percentage of total data that is protocol 
+		overhead.
+		<h4>
+			Suggestions</h4>
+		Make your application send fewer, larger application messages. This will 
+		utilize network resources more efficiently.
+		<h3>
+			<a NAME="chattiness"></a>Chattiness Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is sending many small requests and responses. Many small 
+		requests and responses make inefficient use of tier and network resources.
+		<h4>
+			Explanation</h4>
+		The data sent per application turn is small.&nbsp; This may cause significant 
+		network delay. Additionally, a significant portion of application processing 
+		time can be spent processing requests and responses.
+		<br>
+		If you have a "Chattiness" bottleneck without a "Network Cost of Chattiness" 
+		bottleneck, this means that <blockquote>o The application is not incurring 
+			significant network delays due to chattiness;
+			<br>
+			o The application may be incurring significant processing delays due to 
+			overhead associated with handling many small application requests/responses;
+			<br>
+			o The application's "Network Cost of Chattiness" could dramatically increase in 
+			a higher-latency network.</blockquote>The numeric value is the number of 
+		application bytes per application turn.
+		<h4>
+			Suggestions</h4>
+		Make your application send fewer, larger application messages. This will 
+		utilize network and tier resources more efficiently.&nbsp; For example, a 
+		database application should avoid sending groups of records across the network 
+		one record at a time.
+		<h3>
+			<a NAME="network_cost_of_chattiness"></a>Network Cost of Chattiness Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is incurring significant networking delays due to many 
+		application turns.
+		<h4>
+			Explanation</h4>
+		Each time the conversation changes direction (an "application turn"), the 
+		packets incur a network delay while traversing the network.&nbsp; Mildly chatty 
+		applications suffer over high-latency networks (like WANs), while very chatty 
+		applications can suffer even over low-latency networks (like LANs).
+		<br>
+		Interactive applications (such as telnet) tend to be chattier than 
+		non-interactive applications.
+		<br>
+		The numeric value is the total network delay incurred as a result of 
+		application turns, represented as a percentage of the overall application 
+		response time.
+		<h4>
+			Suggestions</h4>
+		1) Make your application send fewer, larger application messages. This will 
+		utilize network and tier resources more efficiently.&nbsp; For example, a 
+		database application should avoid sending groups of records across the network 
+		one record at a time.
+		<br>
+		2) Consider decreasing the network latency between chatty tiers: <blockquote>a) If 
+			the application has a "Transmission Delay" bottleneck between the chatty tiers, 
+			increasing the transmission speed between those tiers may help.
+			<br>
+			b) If the application has a "Propagation Delay" bottleneck between the chatty 
+			tiers, decreasing the propagation delay between those tiers may help.</blockquote>
+		<h3>
+			<a NAME="propagation_delay"></a>Propagation Delay Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is experiencing a significant bottleneck due to the time it 
+		takes packets to propagate across the network.
+		<br>
+		Explanation
+		<br>
+		Each time the application conversation changes direction (an "application 
+		turn"), the application waits for packets to propagate across the 
+		network.&nbsp; Propagation delay is typically a function of the speed of light 
+		and the distance traveled.&nbsp; Devices latencies also add to propagation 
+		delays.
+		<br>
+		The numeric value is the total delay incurred due to propagation, represented 
+		as a percentage of the overall application response time.
+		<h4>
+			Suggestions</h4>
+		1) Consider moving the affected tiers physically closer together.
+		<br>
+		2) If the application has a "Chattiness" bottleneck, addressing the 
+		application's chattiness may significantly improve application response time.
+		<h3>
+			<a NAME="transmission_delay"></a>Transmission Delay Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is experiencing a significant bottleneck due to the 
+		transmission speed.
+		<h4>
+			Explanation</h4>
+		A packet's transmission delay is a function of the size of the packet.&nbsp; 
+		Lower transmission speeds cause larger delays.
+		<br>
+		The numeric value represents the total delay incurred due to transmission 
+		speed, as a percentage of the overall application response time.
+		<h4>
+			Suggestions</h4>
+		1) Consider using faster links.
+		<br>
+		2) Consider sending less data.
+		<h3>
+			<a NAME="protocol_delay"></a>Protocol Delay Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is experiencing a significant bottleneck due to protocol 
+		effects.
+		<h4>
+			Explanations</h4>
+		Network protocols (such as TCP) frequently perform flow control, congestion 
+		control, etc. which may throttle the rate at which applications send 
+		data.&nbsp; Other protocol effects that can impact application performance 
+		include retransmissions and collisions.
+		<br>
+		The numeric value is the total delay incurred due to protocol effects, 
+		represented as a percentage of the overall application response time.
+		<h4>
+			Suggestions</h4>
+		1) Check for evidence of problems such as collisions at the MAC layer or 
+		retransmissions at the transport layer.
+		<br>
+		2) If the application is using TCP: <blockquote>a) Check to see if the application 
+			is using Nagle's Algorithm. <blockquote>o Applications can disable Nagle's 
+				Algorithm with a system call such as "setsockopt(?, TCP_NODELAY,?)"
+				<br>
+				o Nagle's Algorithm can frequently be disabled for an entire tier.</blockquote>
+			b) Check to see if "TCP Windowing" is reported as a bottleneck.</blockquote>
+		<h3>
+			<a NAME="congestion_delay"></a>Congestion Delay Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is experiencing a significant bottleneck due to congestion 
+		effects.
+		<h4>
+			Explanations</h4>
+		If high amounts of network traffic result in links that are heavily utilized 
+		(regardless of the available bandwidth on the link), the network will induce a 
+		variable queuing delay. This delay might throttle the rate at which 
+		applications send data. Other congestion effects that can affect application 
+		performance include retransmissions and collisions.
+		<br>
+		The numeric value is the total delay incurred due to congestion effects, 
+		represented as a percentage of the overall application response time
+		<h4>
+			Suggestions</h4>
+		1) Use faster links.
+		<br>
+		2) Send less data.
+		<br>
+		3) Reschedule the application to occur off-hours, or when there is less 
+		traffic.
+		<h3>
+			<a NAME="connection_resets"></a>Connection Resets Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The application is experiencing an excessive number of connection resets.
+		<h4>
+			Explanation</h4>
+		Connection resets can occur for a variety of reasons, including: <blockquote>1)&nbsp; 
+			An application is closing a connection.
+			<br>
+			2)&nbsp; Delayed or duplicate connection control packets are received.
+			<br>
+			3)&nbsp; An application is attempting to open a connection on a port where no 
+			application is listening.</blockquote>Note, however, that some protocols 
+		such as HTTP frequently have many connection resets, which is normal.
+		<br>
+		The numeric value is the total number of connection resets.
+		<h4>
+			Suggestions</h4>
+		Repeat the experiment wherein you captured application traffic. Import the new 
+		packet trace into ACE to determine if connection resets are typical.
+		<h3>
+			<a NAME="retransmissions"></a>Retransmissions Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		Retransmissions are significantly affecting application response times.
+		<h4>
+			Explanation</h4>
+		Transport protocols such as TCP will retransmit packets if packets are lost or 
+		excessively delayed.&nbsp; This leads to longer application response times 
+		because: <blockquote>1)&nbsp; Data must be transmitted more than once.
+			<br>
+			2) When TCP observes packet loss, it infers that the network is 
+			congested.&nbsp; This causes TCP to reduce the rate at which applications can 
+			send traffic. Retransmissions increase the likelihood of "TCP Windowing" 
+			bottlenecks because retransmissions cause TCP to shrink the Congestion Control 
+			Window.</blockquote>Lossy channels such as Frame Relay or ATM can allow 
+		applications to "burst" above sustainable data transmission rates.&nbsp; These 
+		"bursts" allow greater data rates, but packets within a burst are more likely 
+		to be dropped.
+		<br>
+		The numeric value represents the percentage of packets that were retransmitted.
+		<h4>
+			Suggestions</h4>
+		1) Capture another trace of your application traffic and re-import it into 
+		ACE.&nbsp; This can help you determine if retransmissions are typical.
+		<br>
+		2) Reduce the likelyhood of congestion in the network by increasing network 
+		capacity.&nbsp; If possible, you may want to determine where packet losses are 
+		occurring.
+		<br>
+		3) Enable TCP extensions (such as Selective Acknowledgements and Fast 
+		Retransmit/Fast Recovery) which increase TCP's ability to cope with packet loss 
+		and retransmissions.&nbsp; The method of enabling these TCP extensions varies 
+		according to your operating system, and you may need to upgrade your operating 
+		system version.
+		<br>
+		4) If you are using Frame Relay and/or ATM, decrease the "lossiness" by 
+		enabling traffic shaping. Traffic shaping keeps data transmission rates within 
+		the sustainable level, which means packets are less likely to be dropped. 
+		Contact your service provider and/or vendor for additional information.
+		<h3>
+			<a NAME="out_of_seq"></a>Out of Sequence Packets</h3>
+		<h4>
+			Diagnosis</h4>
+		Many packets are being received out of order. This may be caused by packet loss 
+		and retransmissions.
+		<h4>
+			Explanation and Suggestions</h4>
+		Same as <a href="#retransmissions">retransmissions</a>.
+		<h3>
+			<a NAME="tcp_windowing"></a>TCP Windowing Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		TCP Windowing is a significant bottleneck for data sent between host A and host 
+		B. TCP is reducing the rate at which the application can sending data because 
+		of congestion control, flow control, send window sizes, and/or receive window 
+		sizes.
+		<br>
+		Explanation
+		<br>
+		When an application is sending bulk data over a high-bandwidth and high- 
+		latency network, TCP window sizes must be large enough to permit TCP to send 
+		many packets in a row without having to wait for TCP ACKs.&nbsp; TCP will only 
+		send data if the amount of sent-but-not-yet-acknowledged data is less than the 
+		minimum of the congestion control window, sender window, and receiver window 
+		sizes. <blockquote>o The sender and receiver windows have default sizes, which can 
+			be overridden by an application.
+			<br>
+			o The congestion control window is dynamically sized by TCP in response to 
+			retransmissions and other factors.
+			<br>
+			o TCP will be forced to wait for acknowledgments if any windows are less than 
+			the "bandwidth-delay product". The bandwidth-delay product is 2 x Bandwidth x 
+			Propagation Delay.
+			<br>
+			o See TCP/IP Illustrated, Vol. 1 by Richard Stevens for additional 
+			explanations.</blockquote>The numeric value is the amount of 
+		bandwidth-delay product used by the TCP connection.
+		<h4>
+			Suggestions</h4>
+		Make sure the application is using windows which are larger than the 
+		bandwidth-delay product. The maximum amount of sent-but-not-yet-acknowledged 
+		data from the source to the destination host appears as the AppDoctor statistic 
+		Max Unacknowledged Data Sent.&nbsp; It is likely that one of the windows is 
+		equal to the AppDoctor statistic Max Unacknowledged Data Sent. <blockquote>1) Check 
+			the receive window size for the destination host. <blockquote>a) This is visible in 
+				the TCP protocol decode as WIN=XXXX.
+				<br>
+				b) If this is approximately equal to Max Unacknowledged Data Sent, then the 
+				receive window is likely the bottleneck. <blockquote>o Applications can set the 
+					receive window size with a system call such as "setsockopt (?, SO_RCVBUF,?)"
+					<br>
+					o The default receive window size can frequently be set for an entire tier.</blockquote>
+			</blockquote>2) If there are many TCP retransmissions, then the congestion 
+			control window may be the bottleneck. You can decrease the negative effects of 
+			retransmissions by enabling TCP extensions such as Fast Retransmit/Fast 
+			Recovery and Selective Acknowledgments. The method of enabling these TCP 
+			extensions varies according to your operating system, and you may need to 
+			upgrade your operating system version.
+			<p>3) If receive window and retransmissions do not seem to be the bottleneck, try 
+				increasing the send window size for the source host. <blockquote>a) Applications 
+					can set the send window size with a system call such as "setsockopt (?, 
+					SO_SNDBUF,?)"
+					<br>
+					b) The default receive window size can frequently be set for an entire tier.</blockquote>
+		</blockquote>
+		
+		<h3>
+			<a NAME="tcp_frozen_window"></a>TCP Frozen Window Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		The advertised TCP Receive Window has dropped to a value smaller than the Maximum 
+		Segment Size (MSS). This is affecting your application response time.
+
+		<h4>
+			Explanation</h4>
+		The advertised TCP Receive Window has dropped to a value smaller than
+		the MSS. When this occurs, the sender cannot send any data until the 
+		receive window is one MSS or larger.
+		<br><br>
+		To determine if the receive window has become larger, the sending side
+		periodically sends one-byte probe packets. These contents of these
+		probe packets depends on the particular implementation, but they are
+		usually sent with an exponential backoff.
+		<br><br>
+		The usual case of a TCP frozen window is that the application on the
+		receiving side is not taking data from the TCP receive buffer quickly
+		enough.
+
+		<h4>
+			Suggestions</h4>
+		1) Send less data.
+		<br>2) Have the receiving application retrieve the data more quickly; if the application cannot
+		process all the data at once, consider storing the data in another buffer.
+		<br>3) Upgrade the receiving computer.
+		
+		<h3>
+			<a NAME="tcp_nagles"></a>TCP Nagle's Algorithm Bottleneck</h3>
+		<h4>
+			Diagnosis</h4>
+		Nagle's algorithm is present and is slowing application response times.
+
+		<h4>
+			Explanation</h4>
+		Nagle's algorithm is a sending-side algorithm that reduces the number
+		of small packets on the network, thereby increasing router efficiency.
+		Nagle's algorithm is causing excessive numbers of delayed ACKs and is
+		slowing down the application.
+
+		<h4>
+			Suggestions</h4>
+		1) Disable Nagle's algorithm for this application.<br>
+		2) Rewrite the application such that it sends fewer, larger packets, or does not encounter a TCP delayed ACK.<br>
+		3) Configure TCP on the receiving host so that TCP acknowledges every packet it receives.
+		&nbsp;
+	</body>
+</html>
